@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUDRA CELEBRATION | Food Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#21133d,#4c1d95,#111827);
+    color:white;
+    min-height:100vh;
+    padding-bottom:95px;
+}
+
+header{
+    text-align:center;
+    padding:22px 15px;
+    background:rgba(0,0,0,.25);
+    border-bottom:1px solid #ffd86b;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    color:#ffd86b;
+    font-size:27px;
+    font-weight:bold;
+}
+
+.subtitle{
+    color:#ddd;
+    margin-top:5px;
+    font-size:13px;
+}
+
+.table{
+    display:inline-block;
+    margin-top:10px;
+    padding:7px 15px;
+    background:#ffd86b;
+    color:#241500;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+/* TRACK */
+
+.trackTop{
+    margin:15px;
+}
+
+.trackTop button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(90deg,#ec4899,#7c3aed);
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+}
+
+#trackPanel{
+    display:none;
+    margin:0 15px 18px;
+    padding:18px;
+    background:white;
+    color:#222;
+    border-radius:18px;
+}
+
+#trackPanel h2{
+    color:#4c1d95;
+    margin-bottom:12px;
+}
+
+#trackOrderId{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.trackBtn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#4c1d95;
+    color:white;
+    font-weight:bold;
+}
+
+#trackLoading,
+#trackResult,
+#trackError{
+    display:none;
+}
+
+#trackLoading{
+    text-align:center;
+    margin-top:12px;
+}
+
+#trackResult{
+    margin-top:15px;
+    padding:15px;
+    background:#f3f0ff;
+    border-radius:12px;
+    text-align:center;
+}
+
+.status{
+    color:#7c3aed;
+    font-size:25px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+#trackError{
+    color:#dc2626;
+    text-align:center;
+    margin-top:12px;
+}
+
+/* MENU */
+
+.title{
+    text-align:center;
+    color:#ffd86b;
+    font-size:23px;
+    margin:20px 0 15px;
+}
+
+.menu{
+    max-width:600px;
+    margin:auto;
+    padding:0 15px;
+}
+
+.item{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:17px;
+    padding:17px;
+    margin-bottom:13px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.itemName{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.price{
+    color:#ffd86b;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.add{
+    background:#ffd86b;
+    color:#241500;
+    border:0;
+    padding:10px 18px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.qtyBox{
+    display:none;
+    align-items:center;
+    gap:9px;
+}
+
+.qtyBox button{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:8px;
+    background:#ffd86b;
+    color:#241500;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.qtyNumber{
+    min-width:22px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* CART */
+
+.cart{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:20;
+    background:#111827;
+    border-top:1px solid #ffd86b;
+    padding:12px 15px;
+}
+
+.cartInside{
+    max-width:600px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.cartInfo{
+    font-size:14px;
+}
+
+.cartTotal{
+    color:#ffd86b;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:3px;
+}
+
+.orderBtn{
+    border:0;
+    padding:13px 18px;
+    border-radius:11px;
+    background:linear-gradient(90deg,#f59e0b,#ffd86b);
+    color:#241500;
+    font-weight:bold;
+}
+
+.orderBtn:disabled{
+    opacity:.5;
+}
+
+/* SUCCESS */
+
+#successBox{
+    display:none;
+    margin:20px 15px;
+    padding:22px;
+    background:white;
+    color:#222;
+    border-radius:20px;
+    text-align:center;
+}
+
+.successIcon{
+    font-size:45px;
+}
+
+#successBox h2{
+    color:#16a34a;
+    margin:8px 0;
+}
+
+.orderId{
+    color:#7c3aed;
+    font-size:23px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.copy{
+    border:0;
+    background:#7c3aed;
+    color:white;
+    padding:10px 18px;
+    border-radius:9px;
+    font-weight:bold;
+}
+
+.successTrack{
+    margin-top:15px;
+    color:#555;
+    font-size:14px;
+}
+
+.successTrack button{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:0;
+    border-radius:10px;
+    background:#ec4899;
+    color:white;
+    font-weight:bold;
+}
+
+/* REVIEW */
+
+#reviewPopup{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.75);
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.reviewBox{
+    background:white;
+    color:#222;
+    width:100%;
+    max-width:360px;
+    padding:25px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.reviewBox h2{
+    margin-bottom:10px;
+}
+
+.reviewBox p{
+    color:#555;
+    margin-bottom:18px;
+}
+
+.reviewBtn{
+    display:block;
+    padding:13px;
+    background:#4285f4;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.noThanks{
+    width:100%;
+    padding:12px;
+    border:0;
+    border-radius:10px;
+    background:#eee;
+}
+
+@media(max-width:500px){
+    .itemName{
+        font-size:15px;
+    }
+
+    .add{
+        padding:9px 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">RUDRA CELEBRATION</div>
+    <div class="subtitle">🍽️ Food Ordering System</div>
+    <div class="table" id="tableText">TABLE 1</div>
+</header>
+
+
+<!-- TRACK ORDER -->
+
+<div class="trackTop">
+    <button onclick="toggleTrack()">
+        🔎 TRACK ORDER
+    </button>
+</div>
+
+<div id="trackPanel">
+
+    <h2>🔎 Track Your Order</h2>
+
+    <input
+        type="text"
+        id="trackOrderId"
+        placeholder="Enter Order ID"
+    >
+
+    <button class="trackBtn" onclick="trackOrder()">
+        Check Order Status
+    </button>
+
+    <div id="trackLoading">
+        ⏳ Checking order...
+    </div>
+
+    <div id="trackResult">
+
+        <div>Current Order Status</div>
+
+        <div class="status" id="trackStatus">
+            -
+        </div>
+
+        <div id="trackMessage">
+            -
+        </div>
+
+    </div>
+
+    <div id="trackError">
+        Order नहीं मिला। Order ID check करें।
+    </div>
+
+</div>
+
+
+<div class="title">
+    ✨ OUR MENU ✨
+</div>
+
+
+<div class="menu" id="menuList"></div>
+
+
+<!-- SUCCESS -->
+
+<div id="successBox">
+
+    <div class="successIcon">✅</div>
+
+    <h2>Order Placed Successfully!</h2>
+
+    <div>Your Order ID</div>
+
+    <div class="orderId" id="successOrderId">-</div>
+
+    <button class="copy" onclick="copyOrderId()">
+        📋 Copy
+    </button>
+
+    <div class="successTrack">
+        Track Order से अपना order status देख सकते है
+
+        <button onclick="openTrackAfterOrder()">
+            🔎 Track Order
+        </button>
+    </div>
+
+</div>
+
+
+<!-- CART -->
+
+<div class="cart">
+
+    <div class="cartInside">
+
+        <div class="cartInfo">
+            🛒 <span id="cartCount">0</span> Items
+
+            <div class="cartTotal">
+                ₹<span id="cartTotal">0</span>
+            </div>
+        </div>
+
+        <button
+            class="orderBtn"
+            id="orderBtn"
+            onclick="placeOrder()"
+            disabled
+        >
+            PLACE ORDER
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- REVIEW -->
+
+<div id="reviewPopup">
+
+    <div class="reviewBox">
+
+        <h2>⭐ Thank You!</h2>
+
+        <p>
+            RUDRA CELEBRATION को Google पर अपना review दें।
+        </p>
+
+        <a
+            class="reviewBtn"
+            href="#"
+            onclick="closeReview();return false;"
+        >
+            ⭐ Rate us on Google Map
+        </a>
+
+        <button class="noThanks" onclick="closeReview()">
+            No Thanks
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   BACKEND
+========================= */
+
+const BACKEND_URL =
+"https://script.google.com/macros/s/AKfycbxgbGCtGLZ_3Z-4X0amET_updY7oo6m0mVgtVUtW334Ncqx3V__Tu2-JDuqdzPH-eoi5A/exec";
+
+
+/* =========================
+   TABLE
+========================= */
+
+const params =
+new URLSearchParams(window.location.search);
+
+const table =
+params.get("table") ||
+localStorage.getItem("rudraTable") ||
+"1";
+
+localStorage.setItem("rudraTable",table);
+
+document.getElementById("tableText").innerText =
+"TABLE " + table;
+
+
+/* =========================
+   MENU DATA
+========================= */
+
+const menuItems = [
+
+    {
+        name:"Chai",
+        price:20,
+        emoji:"☕"
+    },
+
+    {
+        name:"Small Water Bottle",
+        price:10,
+        emoji:"💧"
+    },
+
+    {
+        name:"Big Water Bottle",
+        price:20,
+        emoji:"💧"
+    },
+
+    {
+        name:"Cold Drink",
+        price:40,
+        emoji:"🥤"
+    },
+
+    {
+        name:"Veg Sandwich",
+        price:80,
+        emoji:"🥪"
+    },
+
+    {
+        name:"French Fries",
+        price:100,
+        emoji:"🍟"
+    }
+
+];
+
+
+/* =========================
+   CART
+========================= */
+
+let cart =
+JSON.parse(
+    localStorage.getItem("rudraCart") || "{}"
+);
+
+
+/* =========================
+   CREATE MENU
+========================= */
+
+function renderMenu(){
+
+    const menu =
+    document.getElementById("menuList");
+
+    menu.innerHTML = "";
+
+
+    menuItems.forEach((item,index)=>{
+
+        const div =
+        document.createElement("div");
+
+        div.className = "item";
+
+        div.innerHTML = `
+
+            <div>
+                <div class="itemName">
+                    ${item.emoji} ${item.name}
+                </div>
+
+                <div class="price">
+                    ₹${item.price}
+                </div>
+            </div>
+
+            <button
+                class="add"
+                id="add-${index}"
+                onclick="addItem(${index})"
+            >
+                ADD
+            </button>
+
+            <div
+                class="qtyBox"
+                id="qty-${index}"
+            >
+
+                <button
+                    onclick="changeQty(${index},-1)"
+                >
+                    −
+                </button>
+
+                <span
+                    class="qtyNumber"
+                    id="num-${index}"
+                >
+                    0
+                </span>
+
+                <button
+                    onclick="changeQty(${index},1)"
+                >
+                    +
+                </button>
+
+            </div>
+
+        `;
+
+        menu.appendChild(div);
+
+    });
+
+
+    updateUI();
+
+}
+
+
+/* =========================
+   ADD ITEM
+========================= */
+
+function addItem(index){
+
+    const item =
+    menuItems[index];
+
+
+    if(!cart[index]){
+
+        cart[index] = {
+            name:item.name,
+            price:item.price,
+            quantity:1
+        };
+
+    }else{
+
+        cart[index].quantity++;
+
+    }
+
+
+    saveCart();
+    updateUI();
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQty(index,value){
+
+    if(!cart[index])
+        return;
+
+
+    cart[index].quantity += value;
+
+
+    if(cart[index].quantity <= 0){
+
+        delete cart[index];
+
+    }
+
+
+    saveCart();
+    updateUI();
+
+}
+
+
+/* =========================
+   SAVE CART
+========================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        "rudraCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================
+   UPDATE UI
+========================= */
+
+function updateUI(){
+
+    let count = 0;
+    let total = 0;
+
+
+    menuItems.forEach((item,index)=>{
+
+        const addButton =
+        document.getElementById("add-"+index);
+
+        const qtyBox =
+        document.getElementById("qty-"+index);
+
+        const number =
+        document.getElementById("num-"+index);
+
+
+        const data =
+        cart[index];
+
+
+        if(data){
+
+            addButton.style.display = "none";
+
+            qtyBox.style.display = "flex";
+
+            number.innerText =
+            data.quantity;
+
+
+            count += data.quantity;
+
+            total +=
+            data.quantity * data.price;
+
+        }else{
+
+            addButton.style.display = "block";
+
+            qtyBox.style.display = "none";
+
+            number.innerText = "0";
+
+        }
+
+    });
+
+
+    document.getElementById("cartCount")
+        .innerText = count;
+
+    document.getElementById("cartTotal")
+        .innerText = total;
+
+    document.getElementById("orderBtn")
+        .disabled = count === 0;
+
+}
+
+
+/* =========================
+   PLACE ORDER
+========================= */
+
+async function placeOrder(){
+
+    const items =
+    Object.values(cart).map(item=>({
+
+        name:item.name,
+
+        price:item.price,
+
+        quantity:item.quantity
+
+    }));
+
+
+    if(items.length === 0){
+
+        alert("Cart खाली है");
+
+        return;
+
+    }
+
+
+    const button =
+    document.getElementById("orderBtn");
+
+    button.disabled = true;
+    button.innerText = "SENDING...";
+
+
+    try{
+
+        const response =
+        await fetch(BACKEND_URL,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:JSON.stringify({
+
+                action:"createOrder",
+
+                table:table,
+
+                items:items
+
+            })
+
+        });
+
+
+        const data =
+        await response.json();
+
+
+        if(!data.success || !data.orderId){
+
+            throw new Error("Order failed");
+
+        }
+
+
+        localStorage.setItem(
+            "rudraOrderId",
+            data.orderId
+        );
+
+
+        localStorage.removeItem(
+            "rudraCart"
+        );
+
+
+        document.getElementById("successOrderId")
+            .innerText = data.orderId;
+
+
+        document.getElementById("successBox")
+            .style.display = "block";
+
+
+        document.querySelector(".menu")
+            .style.display = "none";
+
+
+        document.querySelector(".title")
+            .style.display = "none";
+
+
+        document.querySelector(".cart")
+            .style.display = "none";
+
+
+        cart = {};
+
+
+        setTimeout(()=>{
+
+            document.getElementById("reviewPopup")
+                .style.display = "flex";
+
+        },1200);
+
+
+    }catch(error){
+
+        alert(
+            "Order send nahi hua.\nInternet check karke dobara try kare."
+        );
+
+        button.disabled = false;
+
+        button.innerText = "PLACE ORDER";
+
+    }
+
+}
+
+
+/* =========================
+   TRACK PANEL
+========================= */
+
+function toggleTrack(){
+
+    const panel =
+    document.getElementById("trackPanel");
+
+
+    if(panel.style.display === "block"){
+
+        panel.style.display = "none";
+
+    }else{
+
+        panel.style.display = "block";
+
+
+        const saved =
+        localStorage.getItem("rudraOrderId");
+
+
+        if(saved){
+
+            document.getElementById("trackOrderId")
+                .value = saved;
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   TRACK AFTER ORDER
+========================= */
+
+function openTrackAfterOrder(){
+
+    document.getElementById("successBox")
+        .style.display = "none";
+
+
+    document.getElementById("trackPanel")
+        .style.display = "block";
+
+
+    const saved =
+    localStorage.getItem("rudraOrderId");
+
+
+    if(saved){
+
+        document.getElementById("trackOrderId")
+            .value = saved;
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   TRACK ORDER
+========================= */
+
+async function trackOrder(){
+
+    const orderId =
+    document.getElementById("trackOrderId")
+        .value
+        .trim();
+
+
+    if(!orderId){
+
+        alert("Order ID डालें");
+
+        return;
+
+    }
+
+
+    document.getElementById("trackLoading")
+        .style.display = "block";
+
+    document.getElementById("trackResult")
+        .style.display = "none";
+
+    document.getElementById("trackError")
+        .style.display = "none";
+
+
+    try{
+
+        const response =
+        await fetch(
+            BACKEND_URL +
+            "?action=getOrder&orderId=" +
+            encodeURIComponent(orderId)
+        );
+
+
+        const data =
+        await response.json();
+
+
+        document.getElementById("trackLoading")
+            .style.display = "none";
+
+
+        if(data.success && data.order){
+
+            const status =
+            data.order.status || "New";
+
+
+            document.getElementById("trackStatus")
+                .innerText = status;
+
+
+            let message =
+            "🆕 आपका order receive हो गया है।";
+
+
+            if(status === "Preparing"){
+
+                message =
+                "👨‍🍳 आपका order अभी prepare हो रहा है।";
+
+            }
+
+            if(status === "Complete"){
+
+                message =
+                "✅ आपका order तैयार है।";
+
+            }
+
+            if(status === "Delivered"){
+
+                message =
+                "🍽️ आपका order delivered हो चुका है।";
+
+            }
+
+
+            document.getElementById("trackMessage")
+                .innerText = message;
+
+
+            document.getElementById("trackResult")
+                .style.display = "block";
+
+
+            localStorage.setItem(
+                "rudraOrderId",
+                orderId
+            );
+
+        }else{
+
+            document.getElementById("trackError")
+                .style.display = "block";
+
+        }
+
+    }catch(error){
+
+        document.getElementById("trackLoading")
+            .style.display = "none";
+
+        document.getElementById("trackError")
+            .innerText =
+            "Internet connection check करके दोबारा try करें।";
+
+        document.getElementById("trackError")
+            .style.display = "block";
+
+    }
+
+}
+
+
+/* =========================
+   COPY
+========================= */
+
+function copyOrderId(){
+
+    const id =
+    localStorage.getItem("rudraOrderId");
+
+
+    if(!id)
+        return;
+
+
+    if(navigator.clipboard){
+
+        navigator.clipboard.writeText(id)
+        .then(()=>{
+
+            alert("Order ID copied: " + id);
+
+        });
+
+    }else{
+
+        alert("Order ID: " + id);
+
+    }
+
+}
+
+
+/* =========================
+   REVIEW
+========================= */
+
+function closeReview(){
+
+    document.getElementById("reviewPopup")
+        .style.display = "none";
+
+}
+
+
+/* START */
+
+renderMenu();
+
+</script>
+
+</body>
+</html>

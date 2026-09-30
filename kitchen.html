@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDRA CELEBRATION | Kitchen Panel</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f5fb;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);
+    color:white;
+    padding:22px 15px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+}
+
+.title{
+    margin-top:5px;
+    font-size:16px;
+}
+
+.active{
+    display:inline-block;
+    margin-top:12px;
+    padding:7px 14px;
+    background:rgba(255,255,255,.18);
+    border-radius:20px;
+    font-size:13px;
+}
+
+/* CONTROLS */
+
+.controls{
+    max-width:1000px;
+    margin:18px auto;
+    padding:0 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.refresh{
+    border:0;
+    background:#4f46e5;
+    color:white;
+    padding:11px 17px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.lastUpdate{
+    font-size:13px;
+    color:#666;
+}
+
+/* STATS */
+
+.stats{
+    max-width:1000px;
+    margin:auto;
+    padding:0 15px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.stat{
+    padding:18px 10px;
+    border-radius:16px;
+    color:white;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.stat:nth-child(1){
+    background:linear-gradient(135deg,#ef4444,#f97316);
+}
+
+.stat:nth-child(2){
+    background:linear-gradient(135deg,#7c3aed,#a855f7);
+}
+
+.stat:nth-child(3){
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.stat:nth-child(4){
+    background:linear-gradient(135deg,#0891b2,#06b6d4);
+}
+
+.statNumber{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.statLabel{
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* ORDERS */
+
+.section{
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.section h2{
+    margin-bottom:15px;
+    color:#312e81;
+}
+
+#orders{
+    display:grid;
+    gap:15px;
+}
+
+.order{
+    background:white;
+    border-radius:17px;
+    padding:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.10);
+    border-left:6px solid #4f46e5;
+}
+
+.order.new{
+    border-left-color:#ef4444;
+}
+
+.order.preparing{
+    border-left-color:#7c3aed;
+}
+
+.order.complete{
+    border-left-color:#16a34a;
+}
+
+.order.delivered{
+    border-left-color:#64748b;
+}
+
+.orderHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.orderId{
+    font-weight:bold;
+    color:#312e81;
+}
+
+.table{
+    background:#ede9fe;
+    color:#5b21b6;
+    padding:6px 10px;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.time{
+    color:#777;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.item:last-child{
+    border-bottom:0;
+}
+
+.itemName{
+    font-weight:bold;
+}
+
+.itemQty{
+    color:#666;
+}
+
+.total{
+    margin-top:12px;
+    text-align:right;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.status{
+    display:inline-block;
+    margin-top:12px;
+    padding:7px 12px;
+    border-radius:20px;
+    background:#f3f4f6;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    margin-top:14px;
+}
+
+.actions button{
+    border:0;
+    padding:10px 5px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.newBtn{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.prepBtn{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.completeBtn{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.deliveredBtn{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.empty{
+    background:white;
+    padding:35px 20px;
+    text-align:center;
+    border-radius:17px;
+    color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .orderHead{
+        align-items:flex-start;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        RUDRA CELEBRATION
+    </div>
+
+    <div class="title">
+        🍽️ KITCHEN MANAGEMENT PANEL
+    </div>
+
+    <div class="active">
+        🟢 SYSTEM ACTIVE
+    </div>
+
+</header>
+
+
+<div class="controls">
+
+    <div class="lastUpdate" id="lastUpdate">
+        Loading orders...
+    </div>
+
+    <button class="refresh" onclick="loadOrders()">
+        🔄 Refresh
+    </button>
+
+</div>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="statNumber" id="newCount">0</div>
+        <div class="statLabel">NEW ORDERS</div>
+    </div>
+
+    <div class="stat">
+        <div class="statNumber" id="preparingCount">0</div>
+        <div class="statLabel">PREPARING</div>
+    </div>
+
+    <div class="stat">
+        <div class="statNumber" id="completeCount">0</div>
+        <div class="statLabel">COMPLETE</div>
+    </div>
+
+    <div class="stat">
+        <div class="statNumber" id="todayCount">0</div>
+        <div class="statLabel">TODAY ORDERS</div>
+    </div>
+
+</div>
+
+
+<div class="section">
+
+    <h2>📋 LIVE ORDERS</h2>
+
+    <div id="orders">
+
+        <div class="empty">
+            ⏳ Orders load हो रहे हैं...
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   RUDRA BACKEND
+========================= */
+
+const BACKEND_URL =
+"https://script.google.com/macros/s/AKfycbxgbGCtGLZ_3Z-4X0amET_updY7oo6m0mVgtVUtW334Ncqx3V__Tu2-JDuqdzPH-eoi5A/exec";
+
+
+let previousOrderIds = [];
+let firstLoad = true;
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadOrders(){
+
+    try{
+
+        const response =
+        await fetch(
+            BACKEND_URL + "?action=getOrders"
+        );
+
+        const data =
+        await response.json();
+
+        if(!data.success){
+
+            throw new Error("Backend error");
+
+        }
+
+        const orders =
+        data.orders || [];
+
+        showOrders(orders);
+
+        updateStats(orders);
+
+        checkNewOrders(orders);
+
+        document.getElementById("lastUpdate")
+            .innerText =
+            "Last updated: " +
+            new Date().toLocaleTimeString();
+
+    }
+
+    catch(error){
+
+        document.getElementById("orders")
+            .innerHTML = `
+                <div class="empty">
+                    ❌ Orders load नहीं हो सके।<br><br>
+                    Internet check करें और Refresh दबाएँ।
+                </div>
+            `;
+
+        document.getElementById("lastUpdate")
+            .innerText = "Connection error";
+
+    }
+
+}
+
+
+/* =========================
+   SHOW ORDERS
+========================= */
+
+function showOrders(orders){
+
+    const box =
+    document.getElementById("orders");
+
+
+    if(!orders.length){
+
+        box.innerHTML = `
+            <div class="empty">
+                🍽️ अभी कोई order नहीं है।
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    orders.slice().reverse().forEach(order => {
+
+        const div =
+        document.createElement("div");
+
+        const status =
+        order.status || "New";
+
+        div.className =
+        "order " +
+        status.toLowerCase();
+
+
+        let itemsHTML = "";
+
+
+        (order.items || []).forEach(item => {
+
+            const qty =
+            item.quantity ||
+            item.qty ||
+            0;
+
+            const price =
+            Number(item.price || 0);
+
+            const itemTotal =
+            qty * price;
+
+
+            itemsHTML += `
+
+                <div class="item">
+
+                    <div>
+                        <span class="itemName">
+                            ${escapeHTML(item.name || item.item || "Item")}
+                        </span>
+
+                        <span class="itemQty">
+                            × ${qty}
+                        </span>
+                    </div>
+
+                    <div>
+                        ₹${itemTotal}
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        div.innerHTML = `
+
+            <div class="orderHead">
+
+                <div class="orderId">
+                    ${escapeHTML(order.orderId || "")}
+                </div>
+
+                <div class="table">
+                    TABLE ${escapeHTML(String(order.table || ""))}
+                </div>
+
+            </div>
+
+
+            <div class="time">
+                🕒 ${escapeHTML(formatTime(order.time))}
+            </div>
+
+
+            ${itemsHTML}
+
+
+            <div class="total">
+                Total: ₹${Number(order.total || 0)}
+            </div>
+
+
+            <div class="status">
+                STATUS: ${escapeHTML(status)}
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="newBtn"
+                    onclick="updateStatus('${safe(order.orderId)}','New')"
+                >
+                    🆕 NEW
+                </button>
+
+                <button
+                    class="prepBtn"
+                    onclick="updateStatus('${safe(order.orderId)}','Preparing')"
+                >
+                    👨‍🍳 PREPARING
+                </button>
+
+                <button
+                    class="completeBtn"
+                    onclick="updateStatus('${safe(order.orderId)}','Complete')"
+                >
+                    ✅ COMPLETE
+                </button>
+
+                <button
+                    class="deliveredBtn"
+                    onclick="updateStatus('${safe(order.orderId)}','Delivered')"
+                >
+                    🍽️ DELIVERED
+                </button>
+
+            </div>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   UPDATE STATS
+========================= */
+
+function updateStats(orders){
+
+    let newCount = 0;
+    let preparingCount = 0;
+    let completeCount = 0;
+
+
+    orders.forEach(order => {
+
+        if(order.status === "New")
+            newCount++;
+
+        if(order.status === "Preparing")
+            preparingCount++;
+
+        if(order.status === "Complete")
+            completeCount++;
+
+    });
+
+
+    document.getElementById("newCount")
+        .innerText = newCount;
+
+    document.getElementById("preparingCount")
+        .innerText = preparingCount;
+
+    document.getElementById("completeCount")
+        .innerText = completeCount;
+
+    document.getElementById("todayCount")
+        .innerText = orders.length;
+
+}
+
+
+/* =========================
+   UPDATE STATUS
+========================= */
+
+async function updateStatus(orderId,status){
+
+    try{
+
+        const response =
+        await fetch(BACKEND_URL,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:JSON.stringify({
+
+                action:"updateStatus",
+
+                orderId:orderId,
+
+                status:status
+
+            })
+
+        });
+
+
+        const data =
+        await response.json();
+
+
+        if(data.success){
+
+            loadOrders();
+
+        }else{
+
+            alert(
+                "Status update नहीं हुआ।"
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        alert(
+            "Internet check करें और दोबारा try करें।"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   NEW ORDER DETECTION
+========================= */
+
+function checkNewOrders(orders){
+
+    const currentIds =
+    orders.map(order => order.orderId);
+
+
+    if(!firstLoad){
+
+        const newOrders =
+        currentIds.filter(
+            id => !previousOrderIds.includes(id)
+        );
+
+
+        if(newOrders.length > 0){
+
+            notifyNewOrder();
+
+        }
+
+    }
+
+
+    previousOrderIds =
+    currentIds;
+
+    firstLoad = false;
+
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+function notifyNewOrder(){
+
+    /* Browser notification */
+
+    if(
+        "Notification" in window &&
+        Notification.permission === "granted"
+    ){
+
+        new Notification(
+            "RUDRA CELEBRATION",
+            {
+                body:"🔔 New food order received!"
+            }
+        );
+
+    }
+
+
+    /* Screen notification */
+
+    const note =
+    document.createElement("div");
+
+    note.innerText =
+    "🔔 NEW ORDER RECEIVED!";
+
+    note.style.position = "fixed";
+    note.style.top = "20px";
+    note.style.left = "50%";
+    note.style.transform =
+    "translateX(-50%)";
+
+    note.style.background = "#ef4444";
+    note.style.color = "white";
+    note.style.padding = "16px 24px";
+    note.style.borderRadius = "12px";
+    note.style.fontWeight = "bold";
+    note.style.zIndex = "9999";
+    note.style.boxShadow =
+    "0 8px 25px rgba(0,0,0,.3)";
+
+    document.body.appendChild(note);
+
+
+    setTimeout(function(){
+
+        note.remove();
+
+    },5000);
+
+}
+
+
+/* =========================
+   NOTIFICATION PERMISSION
+========================= */
+
+if(
+    "Notification" in window &&
+    Notification.permission === "default"
+){
+
+    Notification.requestPermission();
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function safe(value){
+
+    return String(value || "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+
+function formatTime(value){
+
+    if(!value)
+        return "";
+
+    return String(value);
+
+}
+
+
+/* =========================
+   AUTO REFRESH — 15 SEC
+========================= */
+
+loadOrders();
+
+setInterval(
+    loadOrders,
+    15000
+);
+
+</script>
+
+</body>
+</html>

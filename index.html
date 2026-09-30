@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDRA CELEBRATION</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Georgia,"Times New Roman",serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#4b2615 0%,#160b07 45%,#080403 100%);
+    color:#f5dfad;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    overflow:hidden;
+}
+
+body:before,
+body:after{
+    content:"";
+    position:fixed;
+    width:220px;
+    height:220px;
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:50%;
+}
+
+body:before{
+    top:-120px;
+    left:-100px;
+}
+
+body:after{
+    bottom:-120px;
+    right:-100px;
+}
+
+.card{
+    position:relative;
+    width:100%;
+    max-width:520px;
+    min-height:650px;
+    padding:42px 25px 30px;
+    text-align:center;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(55,28,17,.97),
+        rgba(18,9,6,.98)
+    );
+
+    border:1px solid #b88932;
+    border-radius:4px;
+
+    box-shadow:
+    0 0 0 6px rgba(184,137,50,.08),
+    0 25px 70px rgba(0,0,0,.7);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.corner{
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-color:#d4af37;
+    border-style:solid;
+}
+
+.c1{
+    top:14px;
+    left:14px;
+    border-width:2px 0 0 2px;
+}
+
+.c2{
+    top:14px;
+    right:14px;
+    border-width:2px 2px 0 0;
+}
+
+.c3{
+    bottom:14px;
+    left:14px;
+    border-width:0 0 2px 2px;
+}
+
+.c4{
+    bottom:14px;
+    right:14px;
+    border-width:0 2px 2px 0;
+}
+
+.symbol{
+    font-size:42px;
+    color:#d4af37;
+    margin-bottom:15px;
+    text-shadow:0 0 18px rgba(212,175,55,.35);
+}
+
+.small-title{
+    font-size:14px;
+    letter-spacing:5px;
+    color:#d8bd82;
+    margin-bottom:18px;
+    text-transform:uppercase;
+}
+
+h1{
+    font-size:42px;
+    line-height:1.15;
+    letter-spacing:2px;
+    color:#f1d28b;
+    text-shadow:0 3px 12px rgba(0,0,0,.7);
+    margin-bottom:12px;
+}
+
+.divider{
+    width:190px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #d4af37,
+        transparent
+    );
+    margin:12px auto 22px;
+}
+
+.subtitle{
+    font-size:17px;
+    color:#d9c39a;
+    line-height:1.7;
+    max-width:380px;
+    margin-bottom:32px;
+}
+
+.menu-btn{
+    display:block;
+    width:100%;
+    max-width:360px;
+    padding:17px 20px;
+
+    text-decoration:none;
+    color:#241107;
+
+    background:linear-gradient(
+        135deg,
+        #f0d38b,
+        #c99b3b,
+        #f0d38b
+    );
+
+    border:1px solid #f5dc9c;
+    border-radius:3px;
+
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:1px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.4),
+    inset 0 1px rgba(255,255,255,.5);
+
+    transition:.25s;
+}
+
+.menu-btn:hover{
+    transform:translateY(-2px);
+}
+
+.menu-btn:active{
+    transform:scale(.98);
+}
+
+.note{
+    margin-top:22px;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    color:#a99576;
+    line-height:1.6;
+}
+
+.footer{
+    position:absolute;
+    bottom:25px;
+    left:0;
+    right:0;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#806d54;
+    text-transform:uppercase;
+}
+
+.fade{
+    animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:380px){
+    .card{
+        min-height:600px;
+        padding:35px 20px;
+    }
+
+    h1{
+        font-size:34px;
+    }
+
+    .small-title{
+        letter-spacing:3px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card fade">
+
+    <div class="corner c1"></div>
+    <div class="corner c2"></div>
+    <div class="corner c3"></div>
+    <div class="corner c4"></div>
+
+    <div class="symbol">✦</div>
+
+    <div class="small-title">
+        Welcome
+    </div>
+
+    <h1>
+        RUDRA<br>
+        CELEBRATION
+    </h1>
+
+    <div class="divider"></div>
+
+    <div class="subtitle">
+        A Grand Celebration Experience
+        <br>
+        Enjoy delicious food with effortless digital ordering.
+    </div>
+
+    <a href="menu.html?table=1" class="menu-btn">
+        ENTER &nbsp; • &nbsp; ORDER FOOD
+    </a>
+
+    <div class="note">
+        Please scan your table QR code<br>
+        to open your table menu.
+    </div>
+
+    <div class="footer">
+        Premium Digital Ordering
+    </div>
+
+</div>
+
+</body>
+</html>

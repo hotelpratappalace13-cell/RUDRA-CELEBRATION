@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDRA CELEBRATION | Owner Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,#4a210d 0%,#1b0b04 45%,#090403 100%);
+    color:#fff;
+    min-height:100vh;
+}
+
+.header{
+    text-align:center;
+    padding:28px 15px;
+    border-bottom:1px solid #d7aa55;
+    background:rgba(0,0,0,.35);
+}
+
+.header h1{
+    color:#f5cc72;
+    font-size:29px;
+    letter-spacing:2px;
+}
+
+.header p{
+    color:#ddd;
+    margin-top:7px;
+    font-size:14px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:12px;
+    padding:8px 17px;
+    border:1px solid #d7aa55;
+    border-radius:25px;
+    color:#f5cc72;
+    font-size:12px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:20px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.card{
+    background:linear-gradient(145deg,#321608,#170905);
+    border:1px solid #8d6328;
+    border-radius:16px;
+    padding:22px 12px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.4);
+}
+
+.icon{
+    font-size:30px;
+}
+
+.card h3{
+    margin-top:9px;
+    color:#aaa;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.value{
+    margin-top:8px;
+    color:#f5cc72;
+    font-size:27px;
+    font-weight:bold;
+}
+
+.section{
+    margin-top:28px;
+}
+
+.section-title{
+    color:#f5cc72;
+    font-size:21px;
+    margin-bottom:14px;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.action-btn{
+    padding:16px 10px;
+    border:none;
+    border-radius:13px;
+    background:linear-gradient(135deg,#e1b45b,#895716);
+    color:#160a04;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.action-btn:active{
+    transform:scale(.97);
+}
+
+.status{
+    text-align:center;
+    margin:20px 0;
+    color:#aaa;
+    font-size:13px;
+}
+
+.orders-box{
+    margin-top:10px;
+}
+
+.order{
+    background:linear-gradient(145deg,#291106,#150704);
+    border:1px solid #704c20;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:12px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.order-id{
+    color:#f5cc72;
+    font-weight:bold;
+}
+
+.order-table{
+    color:#ddd;
+}
+
+.order-status{
+    padding:6px 10px;
+    border-radius:15px;
+    background:#40240e;
+    color:#f5cc72;
+    font-size:12px;
+}
+
+.order-items{
+    margin-top:12px;
+    color:#ccc;
+    line-height:1.8;
+}
+
+.order-total{
+    margin-top:10px;
+    color:#f5cc72;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.empty{
+    text-align:center;
+    padding:25px;
+    color:#999;
+    background:#160805;
+    border:1px solid #513719;
+    border-radius:12px;
+}
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal{
+    width:100%;
+    max-width:500px;
+    background:linear-gradient(145deg,#351708,#120603);
+    border:1px solid #d7aa55;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 15px 50px rgba(0,0,0,.6);
+}
+
+.modal h2{
+    color:#f5cc72;
+    margin-bottom:18px;
+}
+
+.modal p{
+    color:#ccc;
+    line-height:1.7;
+    margin-bottom:12px;
+}
+
+.close-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    background:#d7aa55;
+    color:#160a04;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid #4b2d16;
+    color:#ddd;
+}
+
+.menu-price{
+    color:#f5cc72;
+    font-weight:bold;
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:450px){
+
+    .container{
+        padding:12px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .card{
+        padding:18px 7px;
+    }
+
+    .value{
+        font-size:22px;
+    }
+
+    .action-btn{
+        font-size:13px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>RUDRA CELEBRATION</h1>
+
+    <p>Premium Owner Dashboard</p>
+
+    <div class="badge">
+        OWNER PANEL • LIVE SYSTEM
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="card">
+        <div class="icon">📦</div>
+        <h3>TOTAL ORDERS</h3>
+        <div class="value" id="totalOrders">0</div>
+    </div>
+
+    <div class="card">
+        <div class="icon">💰</div>
+        <h3>TODAY'S SALES</h3>
+        <div class="value" id="todaySales">₹0</div>
+    </div>
+
+    <div class="card">
+        <div class="icon">🍽️</div>
+        <h3>ITEMS SOLD</h3>
+        <div class="value" id="itemsSold">0</div>
+    </div>
+
+    <div class="card">
+        <div class="icon">🪑</div>
+        <h3>ACTIVE TABLES</h3>
+        <div class="value" id="activeTables">0 / 10</div>
+    </div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="section">
+
+    <div class="section-title">
+        Quick Actions
+    </div>
+
+    <div class="actions">
+
+        <button class="action-btn" onclick="loadOrders()">
+            🔄 Refresh
+        </button>
+
+        <button class="action-btn" onclick="salesReport()">
+            📊 Sales Report
+        </button>
+
+        <button class="action-btn" onclick="manageMenu()">
+            🍽️ Manage Menu
+        </button>
+
+        <button class="action-btn" onclick="settings()">
+            ⚙️ Settings
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="status" id="status">
+    Loading live data...
+</div>
+
+
+<!-- LIVE ORDERS -->
+
+<div class="section orders-box">
+
+    <div class="section-title">
+        🔔 Live Orders
+    </div>
+
+    <div id="ordersList"></div>
+
+</div>
+
+</div>
+
+
+<!-- SALES MODAL -->
+
+<div class="modal-bg" id="salesModal">
+
+    <div class="modal">
+
+        <h2>📊 Sales Report</h2>
+
+        <p>
+            Total Orders:
+            <b id="reportOrders">0</b>
+        </p>
+
+        <p>
+            Today's Sales:
+            <b id="reportSales">₹0</b>
+        </p>
+
+        <p>
+            Items Sold:
+            <b id="reportItems">0</b>
+        </p>
+
+        <p>
+            Active Tables:
+            <b id="reportTables">0</b>
+        </p>
+
+        <button class="close-btn" onclick="closeModal('salesModal')">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MENU MODAL -->
+
+<div class="modal-bg" id="menuModal">
+
+    <div class="modal">
+
+        <h2>🍽️ Manage Menu</h2>
+
+        <div class="menu-item">
+            <span>Chai</span>
+            <span class="menu-price">₹20</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Small Water Bottle</span>
+            <span class="menu-price">₹10</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Big Water Bottle</span>
+            <span class="menu-price">₹20</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Cold Drink</span>
+            <span class="menu-price">₹40</span>
+        </div>
+
+        <div class="menu-item">
+            <span>Veg Sandwich</span>
+            <span class="menu-price">₹80</span>
+        </div>
+
+        <div class="menu-item">
+            <span>French Fries</span>
+            <span class="menu-price">₹100</span>
+        </div>
+
+        <button class="close-btn" onclick="openCustomerMenu()">
+            OPEN CUSTOMER MENU
+        </button>
+
+        <button class="close-btn" onclick="closeModal('menuModal')">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- SETTINGS MODAL -->
+
+<div class="modal-bg" id="settingsModal">
+
+    <div class="modal">
+
+        <h2>⚙️ Settings</h2>
+
+        <p>
+            <b>Restaurant:</b>
+            RUDRA CELEBRATION
+        </p>
+
+        <p>
+            <b>Total Tables:</b>
+            10
+        </p>
+
+        <p>
+            <b>Backend:</b>
+            Connected
+        </p>
+
+        <p>
+            <b>Auto Refresh:</b>
+            Every 15 seconds
+        </p>
+
+        <p>
+            <b>System:</b>
+            QR Food Ordering
+        </p>
+
+        <button class="close-btn" onclick="closeModal('settingsModal')">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+const BACKEND_URL =
+"https://script.google.com/macros/s/AKfycbxgbGCtGLZ_3Z-4X0amET_updY7oo6m0mVgtVUtW334Ncqx3V__Tu2-JDuqdzPH-eoi5A/exec";
+
+
+let latestOrders = [];
+
+
+async function loadOrders(){
+
+    const status =
+        document.getElementById("status");
+
+    status.innerText =
+        "Loading live data...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND_URL +
+                "?action=getOrders&time=" +
+                Date.now()
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.success){
+
+            throw new Error(
+                "Backend returned error"
+            );
+
+        }
+
+
+        latestOrders =
+            data.orders || [];
+
+
+        calculateDashboard(
+            latestOrders
+        );
+
+
+        showOrders(
+            latestOrders
+        );
+
+
+        status.innerText =
+            "● LIVE • Updated " +
+            new Date().toLocaleTimeString();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        status.innerText =
+            "⚠️ Data load nahi ho paya. Internet check kare.";
+
+    }
+
+}
+
+
+
+function calculateDashboard(orders){
+
+    let totalOrders =
+        orders.length;
+
+
+    let todaySales = 0;
+
+
+    let itemsSold = 0;
+
+
+    const activeTables =
+        new Set();
+
+
+    const today =
+        new Date().toDateString();
+
+
+    orders.forEach(order => {
+
+
+        const total =
+            Number(order.total || 0);
+
+
+        const orderDate =
+            new Date(order.time);
+
+
+        if(
+            !isNaN(orderDate.getTime()) &&
+            orderDate.toDateString() === today
+        ){
+
+            todaySales += total;
+
+        }
+
+
+        if(
+            order.status !== "Delivered"
+        ){
+
+            activeTables.add(
+                String(order.table)
+            );
+
+        }
+
+
+        if(order.items){
+
+            order.items.forEach(item => {
+
+                itemsSold +=
+                    Number(
+                        item.quantity ||
+                        item.qty ||
+                        0
+                    );
+
+            });
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalOrders"
+    ).innerText =
+        totalOrders;
+
+
+    document.getElementById(
+        "todaySales"
+    ).innerText =
+        "₹" + todaySales;
+
+
+    document.getElementById(
+        "itemsSold"
+    ).innerText =
+        itemsSold;
+
+
+    document.getElementById(
+        "activeTables"
+    ).innerText =
+        activeTables.size +
+        " / 10";
+
+
+    document.getElementById(
+        "reportOrders"
+    ).innerText =
+        totalOrders;
+
+
+    document.getElementById(
+        "reportSales"
+    ).innerText =
+        "₹" + todaySales;
+
+
+    document.getElementById(
+        "reportItems"
+    ).innerText =
+        itemsSold;
+
+
+    document.getElementById(
+        "reportTables"
+    ).innerText =
+        activeTables.size;
+
+}
+
+
+
+function showOrders(orders){
+
+    const box =
+        document.getElementById(
+            "ordersList"
+        );
+
+
+    if(!orders.length){
+
+        box.innerHTML =
+            '<div class="empty">' +
+            'Abhi koi order nahi hai.' +
+            '</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    orders
+        .slice()
+        .reverse()
+        .forEach(order => {
+
+
+            let itemsHTML = "";
+
+
+            if(order.items){
+
+                order.items.forEach(item => {
+
+                    const name =
+                        item.name ||
+                        item.item ||
+                        "Item";
+
+
+                    const qty =
+                        item.quantity ||
+                        item.qty ||
+                        0;
+
+
+                    itemsHTML +=
+                        name +
+                        " × " +
+                        qty +
+                        "<br>";
+
+                });
+
+            }
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "order";
+
+
+            div.innerHTML = `
+
+                <div class="order-top">
+
+                    <div class="order-id">
+                        ${order.orderId || "Order"}
+                    </div>
+
+                    <div class="order-table">
+                        Table ${order.table || "-"}
+                    </div>
+
+                    <div class="order-status">
+                        ${order.status || "New"}
+                    </div>
+
+                </div>
+
+                <div class="order-items">
+                    ${itemsHTML}
+                </div>
+
+                <div class="order-total">
+                    Total: ₹${order.total || 0}
+                </div>
+
+            `;
+
+
+            box.appendChild(div);
+
+        });
+
+}
+
+
+
+function salesReport(){
+
+    document.getElementById(
+        "salesModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+function manageMenu(){
+
+    document.getElementById(
+        "menuModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+function settings(){
+
+    document.getElementById(
+        "settingsModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+function closeModal(id){
+
+    document.getElementById(
+        id
+    ).style.display =
+        "none";
+
+}
+
+
+
+function openCustomerMenu(){
+
+    window.location.href =
+        "menu.html?table=1";
+
+}
+
+
+
+window.onclick =
+function(event){
+
+    if(
+        event.target.classList.contains(
+            "modal-bg"
+        )
+    ){
+
+        event.target.style.display =
+            "none";
+
+    }
+
+};
+
+
+
+loadOrders();
+
+
+setInterval(
+    loadOrders,
+    15000
+);
+
+
+</script>
+
+</body>
+</html>
